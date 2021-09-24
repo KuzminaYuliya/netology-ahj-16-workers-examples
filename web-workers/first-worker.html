@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button class="slow-button">Кнопка-тормоз</button>
+  <button class="common-button">Кнопка</button>
+<script>
+  const worker = new Worker('first-worker.js');
+
+  const slowButton = document.querySelector('.slow-button');
+  const commonButton = document.querySelector('.common-button');
+
+  slowButton.addEventListener('click', () => {
+    console.log('slow-start');
+
+    worker.postMessage('hello');
+  });
+
+  worker.addEventListener('message', (e) => {
+    console.log('result in window ' + e.data);
+  });
+
+  commonButton.addEventListener('click', () => {
+    console.log('click');
+  })
+</script>
+</body>
+</html>

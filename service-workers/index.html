@@ -1,0 +1,23 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <h1>Пользователь user3345 😎😎😎</h1>
+  <img class="avatar" src="/img/user/user.a2dc56.jpg" />
+  <div class="message"></div>
+  <script src="js/app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./service-worker.js', { scope: './' })
+        .then((reg) => {
+          // регистрация сработала
+          console.log('Registration succeeded. Scope is ' + reg.scope);
+        }).catch((error) => {
+          // регистрация прошла неудачно
+          console.log('Registration failed with ' + error);
+        });
+    }
+  </script>
+</body>
+</html>

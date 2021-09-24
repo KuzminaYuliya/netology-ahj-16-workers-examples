@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="file" class="file">
+  <pre class="preview"></pre>
+<script>
+  const worker = new Worker('file-worker.js');
+
+  const fileInput = document.querySelector('.file');
+  const preview = document.querySelector('.preview');
+
+  fileInput.addEventListener('input', (e) => {
+    const file = e.target.files && e.target.files[0];
+
+    console.log(file);
+
+    if (!file) return;
+
+    worker.postMessage(file);
+  });
+
+  worker.addEventListener('message', (e) => {
+    preview.textContent = e.data;
+  });
+</script>
+</body>
+</html>

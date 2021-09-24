@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    iframe {
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Postmessage demo</h1>
+  <button class="send-button">Send message</button>
+  <pre class="messages"></pre>
+  <iframe class="iframe" src="http://localhost:8081/"></iframe>
+  <script>
+    const sendButton = document.querySelector('.send-button');
+    const messages = document.querySelector('.messages');
+
+    const iframe = document.querySelector('.iframe');
+    const iframeWindow = iframe.contentWindow;
+    iframe.addEventListener('load', () => {
+      sendButton.addEventListener('click', () => {
+        iframeWindow.postMessage('hello', 'http://localhost:8081/')
+      });
+    });
+
+    window.addEventListener('message', (e) => {
+      console.log(e);
+
+      messages.appendChild(document.createTextNode(e.data + '\n'));
+    });
+  </script>
+</body>
+</html>
